@@ -46,8 +46,23 @@
         
         .list li:nth-child(even) {
             transform: perspective(100px) rotateX(3deg);
-            background: white
+            background: white;
+            border-bottom: 1px solid rgb(163, 49, 4);
             /* background: linear-gradient(to bottom, #ffffff 0%, #EFEFEF 100%); */
+        }
+        
+        .list li span {
+            display: inline-block;
+            width: 40%;
+            margin: auto 5px;
+        }
+        
+        .list li span.city {
+            text-align: left;
+        }
+        
+        .list li span.state {
+            text-align: right;
         }
     </style>
 </head>
