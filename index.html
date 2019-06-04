@@ -63,10 +63,18 @@
         <li><span class="city">city even four</span><span class="state">state even four</span></li>
     </ul>
     <script>
+        let list = document.querySelector('.list');
         let cities = [];
         fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
             .then(response => response.json())
-            .then(json => cities.push(...json))
+            .then(json => {
+                cities.push(...json);
+                let citiesLists = cities.reduce((lists, city) => {
+                    return `${lists}<li><span class="city">${city.city}</span><span class="state">${city.state}</span></li>`;
+                }, '');
+
+                list.innerHTML = citiesLists;
+            })
             .catch(reason => console.log(reason));
     </script>
 </body>
