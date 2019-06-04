@@ -104,10 +104,7 @@
         let searchBox = document.querySelector('#search-box');
         searchBox.oninput = function(e) {
             let typed = e.currentTarget.value;
-            console.log(cities);
             let suggestedCities = cities.filter(city => city.city.includes(typed) || city.state.includes(typed));
-            console.log(typed);
-            console.log(suggestedCities);
             displayCities(suggestedCities);
         }
     </script>
