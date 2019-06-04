@@ -80,17 +80,36 @@
     <script>
         let list = document.querySelector('.list');
         let cities = [];
+        let citiesLists;
+
+        /*function to display cities*/
+        function displayCities(c) {
+            citiesLists = c.reduce((lists, city) => {
+                return `${lists}<li><span class="city">${city.city}</span><span class="state">${city.state}</span></li>`;
+            }, '');
+
+            list.innerHTML = citiesLists;
+        }
+
+
         fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
             .then(response => response.json())
             .then(json => {
                 cities.push(...json);
-                let citiesLists = cities.reduce((lists, city) => {
-                    return `${lists}<li><span class="city">${city.city}</span><span class="state">${city.state}</span></li>`;
-                }, '');
-
-                list.innerHTML = citiesLists;
+                displayCities(cities);
             })
             .catch(reason => console.log(reason));
+
+        /*fitering functionality*/
+        let searchBox = document.querySelector('#search-box');
+        searchBox.oninput = function(e) {
+            let typed = e.currentTarget.value;
+            console.log(cities);
+            let suggestedCities = cities.filter(city => city.city.includes(typed) || city.state.includes(typed));
+            console.log(typed);
+            console.log(suggestedCities);
+            displayCities(suggestedCities);
+        }
     </script>
 </body>
 
