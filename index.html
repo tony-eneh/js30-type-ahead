@@ -80,7 +80,7 @@
     <script>
         let list = document.querySelector('.list');
         let cities = [];
-        let citiesLists;
+        let searchBox = document.querySelector('#search-box');
 
         /*function to display cities*/
         function displayCities(c) {
@@ -91,7 +91,14 @@
             list.innerHTML = citiesLists;
         }
 
+        /*function to filter cities list*/
+        function filterList(e) {
+            let typed = e.currentTarget.value;
+            let suggestedCities = cities.filter(city => city.city.includes(typed) || city.state.includes(typed));
+            displayCities(suggestedCities);
+        }
 
+        /*fetch cities data*/
         fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
             .then(response => response.json())
             .then(json => {
@@ -100,13 +107,9 @@
             })
             .catch(reason => console.log(reason));
 
-        /*fitering functionality*/
-        let searchBox = document.querySelector('#search-box');
-        searchBox.oninput = function(e) {
-            let typed = e.currentTarget.value;
-            let suggestedCities = cities.filter(city => city.city.includes(typed) || city.state.includes(typed));
-            displayCities(suggestedCities);
-        }
+
+        /*hook up event listeners*/
+        searchBox.addEventListener('input', filterList);
     </script>
 </body>
 
