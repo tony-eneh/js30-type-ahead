@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Type Ahead</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: rgb(163, 49, 4);
+            margin: 0;
+            padding: 50px;
+        }
+        
+        #search-box {
+            border: 20px solid white;
+            border-radius: 15px;
+            background: seashell;
+            padding: 10px;
+            line-height: 3;
+            min-width: 500px;
+        }
+        
+        .list {
+            list-style: none;
+            line-height: 2;
+            font-size: 1.4em;
+            padding: 0;
+            width: 400px;
+            margin: 0 auto;
+        }
+        
+        .list li:nth-child(odd) {
+            transform: perspective(100px) rotateX(-3deg);
+            background: whitesmoke;
+        }
+        /* .suggestions li:nth-child(even) {
+      transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+      background: linear-gradient(to bottom,  #ffffff 0%,#EFEFEF 100%);
+    }
+    .suggestions li:nth-child(odd) {
+      transform: perspective(100px) rotateX(-3deg) translateY(3px);
+      background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%); */
+        
+        .list li:nth-child(even) {
+            transform: perspective(100px) rotateX(3deg);
+            background: white
+            /* background: linear-gradient(to bottom, #ffffff 0%, #EFEFEF 100%); */
+        }
+    </style>
+</head>
+
+<body>
+    <form action="#" method="get">
+        <input type="search" name="search-box" id="search-box" placeholder="type to see suggestions">
+    </form>
+    <ul class="list">
+        <li><span class="city">city odd one</span><span class="state">state odd one</span></li>
+        <li><span class="city">city even two</span><span class="state">state even two</span></li>
+        <li><span class="city">city odd three</span><span class="state">state odd three</span></li>
+        <li><span class="city">city even four</span><span class="state">state even four</span></li>
+    </ul>
+    <script>
+        let cities = [];
+        fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json')
+            .then(response => response.json())
+            .then(json => cities.push(...json))
+            .catch(reason => console.log(reason));
+    </script>
+</body>
+
+</html>
