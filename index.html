@@ -94,7 +94,7 @@
         /*function to filter cities list*/
         function filterList(e) {
             let typed = e.currentTarget.value;
-            let suggestedCities = cities.filter(city => city.city.includes(typed) || city.state.includes(typed));
+            let suggestedCities = cities.filter(city => city.city.toLowerCase().includes(typed.toLowerCase()) || city.state.toLowerCase().includes(typed.toLowerCase()));
             displayCities(suggestedCities);
         }
 
